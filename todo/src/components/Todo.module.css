@@ -6,7 +6,6 @@
     margin: 1em 0;
     align-items: center;
     color: #566981;
-    border-bottom: 1px solid black;
 }
 
 .content{
@@ -24,7 +23,7 @@
     font-size: 1.2em;
     text-align: left;    
     word-wrap: break-word;
-    text-shadow: 1px 1px 5px rgba(1, 10, 26, 0.514);
+    text-shadow: 1px 1px 5px rgba(1, 10, 26, 0.301);
 }
 
 .todo p{
