@@ -5,7 +5,7 @@ function Todo({todo , removeTodo, completeTodo}){
         <div key={todo.id} className={styles.todo}>
 
             <div className={styles.content}>
-              <h1 style={{color: todo.isCompleted ? "green"  : ""}}>{todo.text}</h1>
+              <h1 style={{color: todo.isCompleted ? "#5cb85c"  : ""}}>{todo.text}</h1>
               <p className="category"><span>Categoria:</span> {todo.category}</p>
             </div>
 
