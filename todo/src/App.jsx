@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import './app.css'
-import Todo from './components/todo';
+import Todo from './components/Todo';
 import ToDoForm from './components/ToDoForm';
 import Search from './components/Search';
 import Filter from './components/Filter';
+import Footer from './components/Footer';
 
 function App(){
 
@@ -60,39 +61,38 @@ function App(){
   const [sort, setSort] = useState("Asc")
 
   return (
-    <div className='app'>
-      <h1>Lista de tarefas</h1>
-
-      <Search search={search} setSearch={setSearch}/>
-      <Filter filter={filter} SetFilter={SetFilter} setSort={setSort}/>
-
-      <div className='todo-list'>
-        {todos
-        //Ordena de acordo com o status da tarefa
-        .filter((todos) =>
-        filter === "All" 
-        ? true: filter ==="Completed" 
-        ? todos.isCompleted
-        : !todos.isCompleted
+    <div>
+      <div className='app'>
+        <h1>Lista de tarefas</h1>
+        <Search search={search} setSearch={setSearch}/>
+        <Filter filter={filter} SetFilter={SetFilter} setSort={setSort}/>
+        <div className='todo-list'>
+          {todos
+          //Ordena de acordo com o status da tarefa
+          .filter((todos) =>
+          filter === "All"
+          ? true: filter ==="Completed"
+          ? todos.isCompleted
+          : !todos.isCompleted
+          )
+          //Busca pelo nome comparando as strings
+          .filter((todo) =>(
+            todo.text.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+          ))
+          //Compara as frases de duas em duas verificando se o valor e maior ou menor e ordena
+          .sort((primeira, segunda)=>
+          sort ==="Asc"
+          ? primeira.text.localeCompare(segunda.text)
+          : segunda.text.localeCompare(primeira.text)
         )
-        //Busca pelo nome comparando as strings
-        .filter((todo) =>(
-          todo.text.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-        ))
-        //Compara as frases de duas em duas verificando se o valor e maior ou menor e ordena 
-        .sort((primeira, segunda)=> 
-        sort ==="Asc"
-        ? primeira.text.localeCompare(segunda.text)
-        : segunda.text.localeCompare(primeira.text)
-      )
-        //Faz um mapeamento e exibe os itens
-        .map((todo) => (
-          <Todo todo={todo} completeTodo={completeTodo} removeTodo={removeTodo}/>
-        ))}
+          //Faz um mapeamento e exibe os itens
+          .map((todo) => (
+            <Todo todo={todo} completeTodo={completeTodo} removeTodo={removeTodo}/>
+          ))}
+        </div>
+          <ToDoForm addTodo={addTodo}/>
       </div>
-
-        <ToDoForm addTodo={addTodo}/>
-
+      <Footer/>
     </div>
   )
   
